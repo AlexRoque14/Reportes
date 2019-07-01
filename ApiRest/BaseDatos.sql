@@ -1,0 +1,15 @@
+CREATE DATABASE 
+IF NOT EXISTS proyecto;
+
+USE proyecto;
+
+CREATE TABLE users(
+	id INT(11) NOT NULL AUTO_INCREMENT,
+    name VARCHAR(45) DEFAULT NULL,
+    email VARCHAR(45) DEFAULT NULL,
+    password VARCHAR(45) DEFAULT NULL,
+    PRIMARY KEY(id)
+);
+
+
+DESCRIBE users;
