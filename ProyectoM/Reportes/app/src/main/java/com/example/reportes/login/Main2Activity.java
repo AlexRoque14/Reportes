@@ -25,8 +25,8 @@ public class Main2Activity extends AppCompatActivity {
 
         user = Connection.getServiceRemote();
 
-        final EditText usr = findViewById(R.id.txtUser);
-        final EditText pass = findViewById(R.id.txtPass);
+        final EditText usr = findViewById(R.id.txtTitle);
+        final EditText pass = findViewById(R.id.txtDesc);
 
         final TextView registro = findViewById(R.id.tv_register);
         final Button login = findViewById(R.id.btn_login);

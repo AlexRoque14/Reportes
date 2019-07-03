@@ -5,6 +5,8 @@ import com.google.gson.annotations.SerializedName;
 
 public class Report {
 
+
+
     @SerializedName("id")
     @Expose
     private Integer id;
@@ -20,6 +22,18 @@ public class Report {
     @SerializedName("fechita")
     @Expose
     private String fechita;
+
+    public Report() {
+        super();
+    }
+
+    public Report(String title, String description, String image, String fechita) {
+        super();
+        this.title = title;
+        this.description = description;
+        this.image = image;
+        this.fechita = fechita;
+    }
 
     public Integer getId() {
         return id;

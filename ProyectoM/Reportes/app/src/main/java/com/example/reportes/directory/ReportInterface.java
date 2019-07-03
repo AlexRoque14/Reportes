@@ -4,6 +4,7 @@ import com.example.reportes.connection.Usuario;
 
 import java.util.List;
 import retrofit2.Call;
+import retrofit2.Callback;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
@@ -20,7 +21,11 @@ public interface ReportInterface {
     Call<Report> addReport(@Body Report report);
 
     @GET("api/report/{id}")
-    Call<Report> getByIdReport(@Path("id") int id);
+    Call<List<Report>> getByIdReport(@Path("id") int id);
+
+    @GET("api/report/{id}")
+    Callback<Report> getByIdReport1(@Path("id") int id);
+
 
     @GET("api/report{title}")
     Call<Report> getByNameReport(@Path("title") String title);

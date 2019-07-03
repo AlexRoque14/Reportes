@@ -6,11 +6,11 @@
     android:layout_height="wrap_content">
 
     <ImageView
-        android:id="@+id/iv_user"
+        android:id="@+id/imagen"
         android:layout_width="198dp"
         android:layout_height="117dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="92dp"
+        android:layout_marginStart="52dp"
         android:layout_marginTop="32dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -20,7 +20,7 @@
         android:id="@+id/txtPassword"
         android:layout_width="264dp"
         android:layout_height="36dp"
-        android:layout_below="@+id/iv_user"
+        android:layout_below="@+id/imagen"
         android:layout_centerHorizontal="true"
         android:layout_marginStart="44dp"
         android:layout_marginTop="28dp"
@@ -47,7 +47,7 @@
         android:inputType="textEmailAddress"
         android:textColor="#161515"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/iv_user" />
+        app:layout_constraintTop_toBottomOf="@+id/imagen" />
 
 
     <EditText
@@ -72,7 +72,7 @@
         android:layout_height="66dp"
         android:layout_below="@+id/txtCorreo"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="88dp"
+        android:layout_marginStart="32dp"
         android:layout_marginTop="28dp"
         android:background="@drawable/button_rectangle_pink"
         android:text="Register"

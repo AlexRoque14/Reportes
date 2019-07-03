@@ -6,26 +6,43 @@
     android:layout_height="match_parent"
     tools:context=".directory.Main3Activity">
 
-    <LinearLayout
-        android:layout_width="349dp"
-        android:layout_height="407dp"
-        android:orientation="vertical"
-        tools:layout_editor_absoluteX="6dp"
-        tools:layout_editor_absoluteY="73dp">
-
-        <ListView
-            android:id="@+id/lv_rep"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-    </LinearLayout>
-
     <Button
-        android:id="@+id/button2"
-        android:layout_width="97dp"
-        android:layout_height="62dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="68dp"
-        android:text="Button"
+        android:id="@+id/btn_NewReport"
+        android:layout_width="87dp"
+        android:layout_height="54dp"
+        android:layout_below="@+id/txtDesc"
+        android:layout_centerHorizontal="true"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="24dp"
+        android:background="@drawable/button_rectangle_pink"
+        android:text="+"
+        android:textColor="#ffffff"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <LinearLayout
+        android:layout_width="344dp"
+        android:layout_height="461dp"
+        android:layout_marginTop="88dp"
+        android:layout_marginEnd="8dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" >
+
+        <ListView
+            android:id="@+id/lv"
+            android:layout_width="match_parent"
+            android:layout_height="312dp" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="354dp"
+        android:layout_height="84dp"
+        android:text="REPORTES"
+        android:textSize="18sp"
+        tools:layout_editor_absoluteX="-4dp"
+        tools:layout_editor_absoluteY="4dp" />
+
 </android.support.constraint.ConstraintLayout>

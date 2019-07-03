@@ -7,40 +7,40 @@
 
 
     <ImageView
-        android:id="@+id/iv_user"
+        android:id="@+id/imagen"
         android:layout_width="200dp"
         android:layout_height="200dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        app:srcCompat="@drawable/student" />
+        app:srcCompat="@drawable/student_01" />
 
     <EditText
-        android:id="@+id/txtUser"
-        android:drawableLeft="@drawable/ic_action_name"
-        android:textColor="#ffffff"
-        android:background="#11000000"
+        android:id="@+id/txtTitle"
         android:layout_width="250dp"
         android:layout_height="36dp"
-        android:layout_below="@+id/iv_user"
+        android:layout_below="@+id/imagen"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="40dp"
+        android:background="#4AC380"
+        android:drawableLeft="@drawable/ic_action_name"
         android:ems="10"
-        android:inputType="textEmailAddress" />
+        android:inputType="textEmailAddress"
+        android:textColor="#0F0F0F" />
 
     <EditText
-        android:id="@+id/txtPass"
-        android:textColor="#ffffff"
-        android:drawableLeft="@drawable/icon_password"
-        android:background="#11000000"
+        android:id="@+id/txtDesc"
         android:layout_width="250dp"
         android:layout_height="36dp"
-        android:layout_alignLeft="@+id/txtUser"
-        android:layout_alignStart="@+id/txtUser"
-        android:layout_below="@+id/txtUser"
-        android:layout_marginTop="20dp"
+        android:layout_below="@+id/txtTitle"
+        android:layout_alignStart="@+id/txtTitle"
+        android:layout_alignLeft="@+id/txtTitle"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:background="#4AC380"
+        android:drawableLeft="@drawable/icon_password"
         android:ems="10"
-        android:inputType="textPassword" />
+        android:inputType="textPassword"
+        android:textColor="#ffffff" />
 
     <Button
         android:id="@+id/btn_login"
@@ -49,7 +49,7 @@
         android:background="@drawable/button_rectangle_pink"
         android:textColor="#ffffff"
         android:textSize="20sp"
-        android:layout_below="@+id/txtPass"
+        android:layout_below="@+id/txtDesc"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="40dp"
         android:text="Login" />
