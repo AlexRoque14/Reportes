@@ -11,13 +11,16 @@ import android.widget.Toast;
 
 
 import com.example.reportes.R;
+import com.example.reportes.directory.Main3Activity;
 import com.example.reportes.login.Main2Activity;
+import com.example.reportes.report.Main4Activity;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MainActivity extends AppCompatActivity {
+public class
+MainActivity extends AppCompatActivity {
 
     UsuarioInterface user;
 
@@ -30,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
         final EditText nombre = findViewById(R.id.txtNombre);
         final EditText correo = findViewById(R.id.txtCorreo);
         final EditText password = findViewById(R.id.txtPassword);
+        final Button btnC = findViewById(R.id.btnC);
 
         user = Connection.getServiceRemote();
 
@@ -44,6 +48,16 @@ public class MainActivity extends AppCompatActivity {
                 addUsuario(user);
             }
         });
+
+        btnC.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, Main2Activity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
     }
 
     public void addUsuario(Usuario r){
@@ -55,8 +69,10 @@ public class MainActivity extends AppCompatActivity {
                 System.out.println(response);
                 if(response.isSuccessful()){
                     Toast.makeText(MainActivity.this, "Usuario registrado correctamente", Toast.LENGTH_SHORT).show();
+
                     Intent intent = new Intent(MainActivity.this, Main2Activity.class);
                     startActivity(intent);
+
                 }
             }
 

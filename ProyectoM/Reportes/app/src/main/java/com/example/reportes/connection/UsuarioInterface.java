@@ -33,6 +33,4 @@ public interface UsuarioInterface {
     Call<Usuario> deleteUser(@Path("id") int id);
 
 
-    //reportes
-
 }

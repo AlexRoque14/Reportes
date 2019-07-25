@@ -1,5 +1,4 @@
-package com.example.reportes.report;
-
+package com.example.reportes.directory;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -21,20 +20,26 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.reportes.R;
+import com.example.reportes.connection.Connection;
+import com.example.reportes.connection.MainActivity;
+import com.example.reportes.connection.Usuario;
 import com.example.reportes.directory.Connection2;
 import com.example.reportes.directory.Main3Activity;
 import com.example.reportes.directory.Report;
 import com.example.reportes.directory.ReportInterface;
 import com.example.reportes.login.Main2Activity;
+import com.example.reportes.report.Main4Activity;
 
 import java.io.File;
+import java.lang.ref.ReferenceQueue;
+import java.util.concurrent.locks.ReentrantLock;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class Main4Activity extends AppCompatActivity {
+public class EditReport extends AppCompatActivity {
 
     ImageView imagen;
     Button button;
@@ -47,7 +52,7 @@ public class Main4Activity extends AppCompatActivity {
     final int COD_SELECCIONA=10;
     final int COD_FOTO=20;
 
-     String path ;
+    public static  String path = "";
 
     static final int REQUEST_IMAGE_CAPTURE = 1;
 
@@ -56,7 +61,7 @@ public class Main4Activity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
+        setContentView(R.layout.activity_edit_report);
 
         report = Connection2.getServiceRemote();
 
@@ -78,44 +83,47 @@ public class Main4Activity extends AppCompatActivity {
             }
         });
 
+
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Report rep = new Report();
-                rep.setId(0);
+                int id = Adaptador.id;
+
+                rep.setId(Adaptador.id);
                 rep.setTitle(txtT.getText().toString());
                 rep.setDescription(txtD.getText().toString());
                 rep.setImage(nombreImagen);
                 rep.setUserId(Main2Activity.user_idd);
-
-                addReport(rep);
+                addReport( id, rep);
             }
         });
 
         btnC.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Main4Activity.this, Main3Activity.class);
+                Intent intent = new Intent(EditReport.this, Main3Activity.class);
                 startActivity(intent);
                 finish();
             }
         });
 
+
     }
 
-    private void addReport(Report rep){
-        Call<Report> call = report.addReport(rep);
+    private void addReport(int id , Report rep){
+        Call<Report> call = report.updateReport(id , rep);
 
         ((Call) call).enqueue(new Callback<Report>() {
             @Override
             public void onResponse(Call<Report> call, Response<Report> response) {
                 System.out.println(response);
                 if(response.isSuccessful()){
-                    Toast.makeText(Main4Activity.this, "Reporte agregado correctamente", Toast.LENGTH_SHORT).show();
 
-                    Intent intent = new Intent(Main4Activity.this, Main3Activity.class);
-                    startActivity(intent);
                     finish();
+                    Intent intent = new Intent(EditReport.this, Main3Activity.class);
+                    startActivity(intent);
+                    Toast.makeText(EditReport.this, "Reporte actualizado correctamente", Toast.LENGTH_SHORT).show();
 
                 }
             }
@@ -130,21 +138,23 @@ public class Main4Activity extends AppCompatActivity {
     private void cargarImagen() {
 
         final CharSequence[] opciones = {"Tomar Foto","Cargar imagen", "Cancelar"};
-        final AlertDialog.Builder alertaOpciones = new AlertDialog.Builder(Main4Activity.this);
+        final AlertDialog.Builder alertaOpciones = new AlertDialog.Builder(EditReport.this);
 
         alertaOpciones.setTitle("Seleccione una opcion");
         alertaOpciones.setItems(opciones, new DialogInterface.OnClickListener(){
 
             @Override
             public  void  onClick(DialogInterface dialogInterface, int i ){
-                if (opciones[i].equals("Tomar Foto")){
+                if(opciones[i].equals("Tomar Foto")){
                     tomarFotografia();
-                }else{
-                    if (opciones[i].equals("Cargar Imagen")){
-                        Intent intent=new Intent(Intent.ACTION_GET_CONTENT, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                }
+                else{
+                    if(opciones[i].equals("Cargar Imagen")){
+                        Intent intent = new Intent(Intent.ACTION_GET_CONTENT, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                         intent.setType("image/");
-                        startActivityForResult(intent.createChooser(intent,"Seleccione la Aplicación"),COD_SELECCIONA);
-                    }else{
+                        startActivityForResult(intent.createChooser(intent, "Seleccione la aplicacion"), COD_SELECCIONA);
+                    }
+                    else{
                         dialogInterface.dismiss();
                     }
                 }
@@ -161,14 +171,10 @@ public class Main4Activity extends AppCompatActivity {
             isCreada=fileImagen.mkdirs();
         }
         if(isCreada==true){
-            nombreImagen=(System.currentTimeMillis()/1000)+".jpg";
-
-            System.out.println("nombreImagen: " + nombreImagen);
+            nombreImagen  = (System.currentTimeMillis()/1000)+".jpg";
         }
 
-        path=Environment.getExternalStorageDirectory()+
-                File.separator+RUTA_IMAGEN+File.separator+nombreImagen;
-
+        path = Environment.getExternalStorageDirectory()+ File.separator + RUTA_IMAGEN + File.separator + nombreImagen;
 
         File imagen = new File (path);
 
@@ -180,28 +186,30 @@ public class Main4Activity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode==RESULT_OK){
+        if(resultCode == RESULT_OK){
 
             switch (requestCode){
                 case COD_SELECCIONA:
-                    Uri miPath=data.getData();
+                    Uri miPath = data.getData();
                     imagen.setImageURI(miPath);
                     break;
-
                 case COD_FOTO:
                     MediaScannerConnection.scanFile(this, new String[]{path}, null,
                             new MediaScannerConnection.OnScanCompletedListener() {
-                                @Override
-                                public void onScanCompleted(String path, Uri uri) {
-                                    Log.i("Ruta de almacenamiento","Path: "+path);
-                                }
-                            });
+                        @Override
+                        public void onScanCompleted(String path, Uri uri) {
+                            Log.i("Ruta de almacenamiento","Path: " + path );
+                        }
+                    });
 
-                    Bitmap bitmap= BitmapFactory.decodeFile(path);
+                    Bitmap bitmap = BitmapFactory.decodeFile(path);
                     imagen.setImageBitmap(bitmap);
+
                     break;
             }
+
         }
+
     }
 
     /*public void llamarIntent(){
@@ -221,4 +229,8 @@ public class Main4Activity extends AppCompatActivity {
             imagen.setImageBitmap(imageBitmap);
         }
     }*/
+
+    public void onClick(View view) {
+        cargarImagen();
+    }
 }

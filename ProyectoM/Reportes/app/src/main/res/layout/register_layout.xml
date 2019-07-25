@@ -68,17 +68,32 @@
 
     <Button
         android:id="@+id/btnAdd"
-        android:layout_width="255dp"
-        android:layout_height="66dp"
+        android:layout_width="147dp"
+        android:layout_height="50dp"
         android:layout_below="@+id/txtCorreo"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
         android:background="@drawable/button_rectangle_pink"
         android:text="Register"
         android:textColor="#ffffff"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtPassword" />
+
+    <Button
+        android:id="@+id/btnC"
+        android:layout_width="109dp"
+        android:layout_height="47dp"
+        android:layout_below="@+id/txtCorreo"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="16dp"
+        android:background="@color/colorAccent"
+        android:text="Cancelar"
+        android:textColor="#ffffff"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtPassword" />
 
 
