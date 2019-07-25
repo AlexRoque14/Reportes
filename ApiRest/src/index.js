@@ -3,6 +3,8 @@ const app = express(); //se utiliza el servicio
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 var cors = require('cors');
+var jwt = require('jsonwebtoken');
+
 
 //settings
 app.set('port', process.env.PORT || 3000); //encaso de estar definido un servicio lo tomará, si no creara uno en el puerto 3000.
@@ -12,6 +14,10 @@ app.set('json spaces', 2);
 app.use(morgan('dev')); //imprime informacion acerca del servidor 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json()); //para crear y recibir archivos Json
+
+app.use(bodyParser.urlencoded({extended: false}))
+app.use(bodyParser.json({limit:'10mb'}))
+
 
 //cors
 app.use(cors());
@@ -33,8 +39,19 @@ app.use(function(req, res, error, next) {
 //routes
 app.use('/api/users',require('./routes/users')); //pedimos la ruta que esta en la carpeta de routes
 app.use('/api/report',require('./routes/report'));
+
+
+
 //starting the server
 //se corre con "npm run dev". 
 app.listen(3000, () => {
     console.log(`Server on port ${app.get('port')}`); //Mensaje al iniciar el servidor 
 });
+
+
+
+
+
+
+
+
